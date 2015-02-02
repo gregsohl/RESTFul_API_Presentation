@@ -1,0 +1,28 @@
+-- Get Request
+curl -i usergroup.com/usergroup/372
+
+-- Response
+HTTP/1.1 200 OK
+Date: Sat, 09 Feb 2013 16:09:50 GMT
+Content-Type: application/json
+
+{
+    id: 372,
+    name: "CRineta",
+	city: 4713
+}
+
+
+
+
+
+-- Response
+HTTP/1.1 200 OK
+Date: Sat, 09 Feb 2013 16:09:50 GMT
+Content-Type: application/json
+
+{
+    id: 372,
+    name: "CRineta",
+	city: http://usergroup.com/city/4713
+}
