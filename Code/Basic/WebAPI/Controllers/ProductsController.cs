@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
@@ -64,14 +62,6 @@ namespace WebApplication2.Controllers
 				return Ok(filteredList);
 
 			return NotFound();
-
-			//var foundProducts = products.Select((p) => p.Name.StartsWith(name));
-			////var product = products.FirstOrDefault((p) => p.Name.StartsWith(name));
-			//if (foundProducts == null)
-			//{
-			//	return NotFound();
-			//}
-			//return Ok(foundProducts);
 		}
 	}
 }
