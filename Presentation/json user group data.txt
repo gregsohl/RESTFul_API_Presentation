@@ -1,0 +1,7 @@
+{"Id":1,"Name":"CRineta","Formed":"2002-01-01Td00:00:00","Zip":"52401","Website":"crineta.org"}
+
+{"Id":2,"Name":"Iowa .NET User Group","Formed":"2001-01-01T00:00:00","Zip":"50309","Website":"iadnug.org"}
+
+{"Id":3,"Name":"Lincoln .NET User Group","Formed":"2004-01-01T00:00:00","Zip":"68502","Website":"www.lincolndev.net"}
+
+{"Id":4,"Name":"Dubuque .NET User Group","Formed":"2008-01-01T00:00:00","Zip":"52002","Website":"www.meetup.com/DbqIneta"}
