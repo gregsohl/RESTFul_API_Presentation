@@ -1,0 +1,27 @@
+-- Get Request
+curl -i myapi.com/todo/4
+
+-- Response
+HTTP/1.1 200 OK
+Date: Sat, 09 Feb 2013 16:09:50 GMT
+Last-Modified: Sat, 02 Feb 2013 12:02:47 GMT
+ETag: "c0947-b1-4d0258df1f625"
+Content-Type: application/json
+
+{
+    id: 4,
+    item: "take out the trash",
+    created: "Sat, 02 Feb 2013 08:29:53 GMT",
+    updated: "Sat, 02 Feb 2013 12:02:47 GMT",
+}
+
+===================================================
+
+-- Header only request
+curl -i -H "If-None-Match: c0947-b1-4d0258df1f625" myapi.com/todo/4
+
+-- Response
+HTTP/1.1 304 Not Modified
+Date: Sat, 09 Feb 2013 16:09:50 GMT
+Last-Modified: Sat, 02 Feb 2013 12:02:47 GMT
+ETag: "c0947-b1-4d0258df1f625"

@@ -10,7 +10,7 @@ namespace WebApplication2.Controllers
 {
 	public class ProductsController : ApiController
 	{
-		Product[] products = new [] 
+		readonly Product[] m_Products = new [] 
         { 
             new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 }, 
             new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M }, 
@@ -18,9 +18,16 @@ namespace WebApplication2.Controllers
             new Product { Id = 4, Name = "Hammer Drill", Category = "Hardware", Price = 247.99M } 
         };
 
+		/// <summary>
+		/// Gets all products.
+		/// </summary>
+		/// <remarks>
+		/// http://server/api/Products
+		/// </remarks>
+		/// <returns></returns>
 		public IEnumerable<Product> GetAllProducts()
 		{
-			return products;
+			return m_Products;
 		}
 
 		/// <summary>
@@ -28,12 +35,12 @@ namespace WebApplication2.Controllers
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <remarks>
-		/// http://localhost:4002/api/Products/1
+		/// http://server/api/Products/1
 		/// </remarks>
 		/// <returns></returns>
 		public IHttpActionResult GetProductById(int id)
 		{
-			var product = products.FirstOrDefault((p) => p.Id == id);
+			var product = m_Products.FirstOrDefault((p) => p.Id == id);
 			if (product == null)
 			{
 				return NotFound();
@@ -46,12 +53,12 @@ namespace WebApplication2.Controllers
 		/// </summary>
 		/// <param name="name">The name.</param>
 		/// <remarks>
-		/// http://localhost:4002/api/Products/Hammer
+		/// http://server/api/Products/Hammer
 		/// </remarks>
 		/// <returns></returns>
 		public IHttpActionResult GetProductByName(string name)
 		{
-			IEnumerable<Product> filteredList = products.Where(x => x.Name.StartsWith(name));
+			IEnumerable<Product> filteredList = m_Products.Where(x => x.Name.StartsWith(name));
 			
 			if (filteredList.Any())
 				return Ok(filteredList);
