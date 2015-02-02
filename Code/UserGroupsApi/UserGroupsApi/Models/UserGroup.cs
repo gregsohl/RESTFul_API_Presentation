@@ -24,6 +24,7 @@ namespace UserGroupsApi.Models
 			Formed = formed;
 			Zip = zip;
 			Website = website;
+
 			LastModified = DateTime.UtcNow;
 		}
 
@@ -33,6 +34,16 @@ namespace UserGroupsApi.Models
 			string hash = Hashes.CalculateMd5Hash(keyValue);
 
 			return hash;
+		}
+
+		public void Update(UserGroup userGroup)
+		{
+			Name = userGroup.Name;
+			Formed = userGroup.Formed;
+			Zip = userGroup.Zip;
+			Website = userGroup.Website;
+
+			LastModified = DateTime.UtcNow;
 		}
 	}
 }

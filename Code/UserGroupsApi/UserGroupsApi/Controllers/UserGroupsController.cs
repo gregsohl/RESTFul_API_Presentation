@@ -12,6 +12,7 @@ namespace UserGroupsApi.Controllers
 {
 	public class UserGroupsController : ApiController
 	{
+		private const string NOT_FOUND_MESSAGE = "The user group specified was not found.";
 		// GET api/values
 		public IEnumerable<UserGroupListItem> Get()
 		{
@@ -42,7 +43,7 @@ namespace UserGroupsApi.Controllers
 				return response;
 			}
 
-			return Request.CreateErrorResponse(HttpStatusCode.NotFound,"The user group specified was not found.");
+			return Request.CreateErrorResponse(HttpStatusCode.NotFound,NOT_FOUND_MESSAGE);
 		}
 
 		// POST api/usergroups
@@ -66,8 +67,18 @@ namespace UserGroupsApi.Controllers
 		}
 
 		// PUT api/usergroups/5
-		public void Put(int id, [FromBody]string value)
+		public HttpResponseMessage Put(int id, [FromBody]UserGroup userGroup)
 		{
+			UserGroup existingUserGroup;
+			bool found = Data.UserGroupRepository.Respository.TryGetValue(userGroup.Id, out existingUserGroup);
+			if (found)
+			{
+				return Request.CreateErrorResponse(HttpStatusCode.NotFound, NOT_FOUND_MESSAGE);
+			}
+
+			existingUserGroup.Update(userGroup);
+
+			return Request.CreateResponse(HttpStatusCode.OK);
 		}
 
 		// DELETE api/usergroups/5
