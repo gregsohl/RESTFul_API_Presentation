@@ -27,7 +27,7 @@ namespace UserGroupsApi.Controllers
 			return results;
 		}
 
-		// GET api/values/5
+		// GET api/usergroups/5
 		public HttpResponseMessage Get(int id)
 		{
 			UserGroup userGroup;
@@ -45,17 +45,32 @@ namespace UserGroupsApi.Controllers
 			return Request.CreateErrorResponse(HttpStatusCode.NotFound,"The user group specified was not found.");
 		}
 
-		// POST api/values
-		public void Post([FromBody]string value)
+		// POST api/usergroups
+		public HttpResponseMessage Post([FromBody]UserGroup userGroup)
 		{
+			UserGroup existingUserGroup;
+			bool found = Data.UserGroupRepository.Respository.TryGetValue(userGroup.Id, out existingUserGroup);
+			if (found)
+			{
+				return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Duplicate UserGroup ID specified.");
+			}
+
+			Data.UserGroupRepository.Respository.Add(userGroup.Id, userGroup);
+
+			var response = Request.CreateResponse(HttpStatusCode.OK, userGroup);
+			response.Headers.ETag = new EntityTagHeaderValue("\"" + userGroup.GetVersion() + "\"");
+			response.Headers.CacheControl = new CacheControlHeaderValue();
+			response.Headers.CacheControl.MaxAge = new TimeSpan(1, 0, 0);
+
+			return response;
 		}
 
-		// PUT api/values/5
+		// PUT api/usergroups/5
 		public void Put(int id, [FromBody]string value)
 		{
 		}
 
-		// DELETE api/values/5
+		// DELETE api/usergroups/5
 		public void Delete(int id)
 		{
 		}

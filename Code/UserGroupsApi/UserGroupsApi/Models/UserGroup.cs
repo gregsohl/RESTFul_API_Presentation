@@ -9,7 +9,7 @@ namespace UserGroupsApi.Models
 		public int Id { get;  set; }
 		public string Name { get;  set; }
 		public DateTime Formed { get; set; }
-		public int CityID { get;  set; }
+		public string Zip { get;  set; }
 		public string Website { get;  set; }
 		public DateTime LastModified { get; set; }
 
@@ -17,12 +17,12 @@ namespace UserGroupsApi.Models
 		{
 		}
 
-		public UserGroup(int id, string name, DateTime formed, int cityID, string website)
+		public UserGroup(int id, string name, DateTime formed, string zip, string website)
 		{
 			Id = id;
 			Name = name;
 			Formed = formed;
-			CityID = cityID;
+			Zip = zip;
 			Website = website;
 			LastModified = DateTime.UtcNow;
 		}
