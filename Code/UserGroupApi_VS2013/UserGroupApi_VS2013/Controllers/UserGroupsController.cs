@@ -82,8 +82,18 @@ namespace UserGroupApi_VS2013.Controllers
 		}
 
 		// DELETE api/usergroups/5
-		public void Delete(int id)
+		public HttpResponseMessage Delete(int id)
 		{
+			UserGroup existingUserGroup;
+			bool found = Data.UserGroupRepository.Respository.TryGetValue(id, out existingUserGroup);
+			if (!found)
+			{
+				return Request.CreateErrorResponse(HttpStatusCode.NotFound, NOT_FOUND_MESSAGE);
+			}
+
+			Data.UserGroupRepository.Respository.Remove(id);
+
+			return Request.CreateResponse(HttpStatusCode.OK);
 		}
 	}
 }
